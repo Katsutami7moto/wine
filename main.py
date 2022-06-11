@@ -4,6 +4,8 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 import datetime
 
+import pandas
+
 env = Environment(
     loader=FileSystemLoader('.'),
     autoescape=select_autoescape(['html', 'xml'])
@@ -23,9 +25,14 @@ elif age_last_number in (2, 3, 4):
 else:
     years = 'лет'
 
+wines_from_excel = pandas.read_excel('wine.xlsx', sheet_name='Лист1').to_dict(orient='records')
+for wine in wines_from_excel:
+    wine['Цена'] = int(wine['Цена'])
+
 rendered_page = template.render(
     winery_age=age,
     years_word_form=years,
+    wines=wines_from_excel,
 )
 
 with open('index.html', 'w', encoding="utf8") as file:
