@@ -31,8 +31,9 @@ if __name__ == "__main__":
         wine['Цена'] = int(wine['Цена'])
 
     dd_wines = defaultdict(list)
-    for wine in wines_dict:
-        dd_wines[wine['Категория']].append(dict(sorted(wine.items())))
+    s_wines = sorted(wines_dict, key=lambda d: d['Цена'])
+    for wine in s_wines:
+        dd_wines[wine['Категория']].append(wine)
     wines = dict(sorted(dict(dd_wines).items()))
 
     rendered_page = template.render(
