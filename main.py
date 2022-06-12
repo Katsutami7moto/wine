@@ -25,21 +25,26 @@ if __name__ == "__main__":
     else:
         years = 'лет'
 
-    wines_excel = read_excel('wine.xlsx', sheet_name='Лист1', na_values=' ', keep_default_na=False)
-    wines_dict = wines_excel.to_dict(orient='records')
-    for wine in wines_dict:
-        wine['Цена'] = int(wine['Цена'])
+    wines_from_excel = read_excel(
+        'wine.xlsx',
+        sheet_name='Лист1',
+        na_values=' ',
+        keep_default_na=False
+    ).to_dict(orient='records')
 
-    dd_wines = defaultdict(list)
-    s_wines = sorted(wines_dict, key=lambda d: d['Цена'])
-    for wine in s_wines:
-        dd_wines[wine['Категория']].append(wine)
-    wines = dict(sorted(dict(dd_wines).items()))
+    categorized_wines = defaultdict(list)
+    sorted_wines = sorted(
+        wines_from_excel,
+        key=lambda w: (w['Категория'], w['Цена'])
+    )
+    for wine in sorted_wines:
+        categorized_wines[wine['Категория']].append(wine)
+    processed_wines = dict(categorized_wines)
 
     rendered_page = template.render(
         winery_age=age,
         years_word_form=years,
-        wines=wines,
+        wines=processed_wines,
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
