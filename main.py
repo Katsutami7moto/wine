@@ -31,13 +31,10 @@ if __name__ == "__main__":
         na_values=' ',
         keep_default_na=False
     ).to_dict(orient='records')
+    wines_from_excel.sort(key=lambda w: (w['Категория'], w['Цена']))
 
     categorized_wines = defaultdict(list)
-    sorted_wines = sorted(
-        wines_from_excel,
-        key=lambda w: (w['Категория'], w['Цена'])
-    )
-    for wine in sorted_wines:
+    for wine in wines_from_excel:
         categorized_wines[wine['Категория']].append(wine)
     processed_wines = dict(categorized_wines)
 
