@@ -58,7 +58,7 @@ SHEET_NAME='Лист1'
 
 Script uses an Excel `*.xlsx` file to store data which is used to form website's index page from template.
 This repository has `wine.xlsx` file as an example. You may copy it and fill it with your data.
-Or, if that file was lost, use this table as an example to create your Excel file (some cells in `Сорт` and `Цена` columns may be empty):
+Or, if that file was lost, use this table as an example to create your Excel file (some cells in `Сорт` and `Акция` columns may be empty):
 
 | Категория    | Имя           | Сорт            | Цена | Картинка          | Акция                |
 |--------------|---------------|-----------------|------|-------------------|----------------------|
