@@ -11,7 +11,7 @@ from pandas import read_excel
 def count_age(est_year: int) -> tuple:
     now_year = datetime.now().year
     age = now_year - est_year
-    age_last_number = int(str(age)[2:])
+    age_last_number = int(str(age)[-1])
     if age_last_number == 1:
         years = 'год'
     elif age_last_number in (2, 3, 4):
